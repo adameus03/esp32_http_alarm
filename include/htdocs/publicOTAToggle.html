@@ -1,0 +1,58 @@
+R"TESSERACT(<!DOCTYPE html>
+<html lang='pl'>
+    <head>
+        <meta charset='utf-8'/>
+        <title>PublicOTA Toggle</title>
+    </head>
+    <body>
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+            }
+
+            .bg {
+                background-image: url("https://images.pexels.com/photos/2651794/pexels-photo-2651794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav_menu {
+                border-style: solid;
+                border-color: green;
+                width: 50%;
+                height: 50%;
+                display: inline-block;
+                width: 60%;
+                height: auto;
+            }
+
+            a, .nav_option {
+                text-decoration: none;
+                font-size: 25px;
+                background-color: #333;
+                color: #eee;
+                border-style: solid;
+                border-width: 1px;
+                border-color: #222;
+            }
+
+            a:hover, .nav_option:hover {
+                color: red;
+            }
+        </style>
+
+        <div class='bg'>
+            <div class='nav_menu'>
+                <div class='nav_option'><a href='ota_upload?state=on'>WŁĄCZ</a></div>
+                <div class='nav_option'><a href='ota_upload?state=off'>WYŁĄCZ</a></div>
+            </div>
+        </div>
+    </body>
+</html>)TESSERACT"
