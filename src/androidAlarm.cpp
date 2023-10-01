@@ -1,4 +1,5 @@
 #include <ESPAsyncWebServer.h>
+#include "deviceName.h"
 
 AsyncWebServer androidServer(8080);
 AsyncEventSource androidEvents("/events");
@@ -19,13 +20,35 @@ void initializeAlarmAndroidServer(){
     androidServerInitialized = true;
 }
 
-void sendAlarmAndroidEvent(){
+void sendAlarmAndroidEvent(const uint16_t& cid){
     if(androidServerInitialized){
         //androidEvents.send("Message", "Event", millis());
         //Serial.println("Message:Event");
         static unsigned long ms;
         ms = millis();
-        androidEvents.send("Message sent from ESP32", "Event", ms);
+        if(cid == 0xffff){
+            androidEvents.send("Brak identyfikatora kamery", "Event", ms);
+        }
+        else {
+            switch(cid){
+                case 1:
+                    androidEvents.send(DEV_1_NAME, "Event", ms);
+                    break;
+                case 2:
+                    androidEvents.send(DEV_2_NAME, "Event", ms);
+                    break;
+                case 3:
+                    androidEvents.send(DEV_3_NAME, "Event", ms);
+                    break;
+                case 4:
+                    androidEvents.send(DEV_4_NAME, "Event", ms);
+                    break;
+                default:
+                    androidEvents.send(("Kamera " + String(cid)).c_str(), "Event", ms);
+
+            }
+            
+        }
         size_t ev_count;
         ev_count = androidEvents.count();
         Serial.println("Sent an event! " + String(ms) + "[ev_count=" + String(ev_count) + "]");

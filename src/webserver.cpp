@@ -89,9 +89,14 @@ static esp_err_t cmd_handler(httpd_req_t* req){
     }
 
     if(!strcmp("jingle", op_param)){
+        uint16_t cid = 0xffff;
+        char cid_param[4];
+        if(httpd_query_key_value(query, "cid", cid_param, sizeof(cid_param)) == ESP_OK){
+            cid = atol(cid_param);
+        }
 
         playSound();
-        sendAlarmAndroidEvent();
+        sendAlarmAndroidEvent(cid);
 
         ///reply/no reply
         const char *response = "F";
@@ -111,9 +116,9 @@ IPAddress subnet(255, 255, 255, 0);
 
 void initializeWebServer(){
     // Configures static IP address
-    if (!WiFi.config(local_IP, gateway, subnet)) {
+    /*if (!WiFi.config(local_IP, gateway, subnet)) {
         Serial.println("STA Failed to configure");
-    }
+    }*/
     
     WiFi.begin(WIFI_SSID, WIFI_PASSWD);
     while (WiFi.status() != WL_CONNECTED) {

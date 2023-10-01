@@ -1,2 +1,2 @@
 void initializeAlarmAndroidServer();
-void sendAlarmAndroidEvent();
+void sendAlarmAndroidEvent(const uint16_t& cid);
